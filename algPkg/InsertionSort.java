@@ -4,16 +4,15 @@ import mainPkg.Defines;
 import mainPkg.JSort;
 
 public class InsertionSort extends Sort{
-	public InsertionSort(int elementNum, Defines defs) {
-		super(elementNum, defs);
+	public InsertionSort(int elementNum) {
+		super(elementNum);
 	}
 
 	@Override
-	public void tick(JSort jsort, Defines defs) {
+	public void tick(JSort jsort) {
 		int ii, key;
-		
-		defs.sortingFPS = (100/defs.divisor)*100;
-		defs.FPS = defs.sortingFPS;
+
+		this.startingOperations(jsort);
 		
 		for (int i = 1; i < this.size; i++) {
 			ii = i-1;
@@ -31,7 +30,7 @@ public class InsertionSort extends Sort{
 			
 			array[ii+1] = key;
 		}
-		
-		super.tick(jsort, defs);
+
+		super.exitOperations(jsort);
 	}
 }

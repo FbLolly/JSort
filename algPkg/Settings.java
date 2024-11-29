@@ -13,34 +13,33 @@ public class Settings extends Sort{
 	private Slider slider;
 	private int i, ii; //gotta modify them from to outside to avoid out of bounds exceptions
 	
-	public Settings(int elementNum, Defines defs) {
-		super(elementNum, defs);
+	public Settings(int elementNum) {
+		super(elementNum);
 		
 		stopped = false;
-		slider = new Slider(defs);
+		slider = new Slider();
 		
-		slider.value = defs.divisor;
+		slider.value = Defines.divisor;
 		slider.setBallY(((slider.value-1)*10)+20);
 	}
 	
-	private boolean settingUtils(JSort jsort, int special, Defines defs) {
+	private boolean settingUtils(JSort jsort, int special) {
 		try {
 			jsort.setMouse(jsort.getMousePoint(MouseInfo.getPointerInfo().getLocation()));
 		}catch (Exception e) {
 			
 		}
 		
-		this.slider.tick(jsort.getMh().clicked, jsort.getMouse(), defs, this);
-		this.slider.settingSlider(this, defs);
+		this.slider.tick(jsort.getMh().clicked, jsort.getMouse(), this);
+		this.slider.settingSlider(this);
 		
 		return super.sortingUtils(jsort, special);
 	}
 	
-	public void tick(JSort jsort, Defines defs) {
+	public void tick(JSort jsort) {
 		//do stuff
-		
-		defs.sortingFPS = (100-defs.divisor)*10;
-		defs.FPS = defs.sortingFPS;
+
+		this.startingOperations(5, 10);
 		
 		while (!stopped) {
 			for (i = 0; i < this.size; i++) {
@@ -48,27 +47,26 @@ public class Settings extends Sort{
 					if (array[ii] > array[ii+1]) {
 						this.swap(ii, ii+1);
 					}
-
-					if (this.settingUtils(jsort, ii, defs)) {
+					
+					if (this.settingUtils(jsort, ii)) {
 						stopped = true;
-						super.tick(jsort, defs);
+						super.exitOperations(jsort);
 						return;
 					}
 				}
 			}
-			
-			this.setArray();
+			this.startingOperations(5, 10);
 		}
-		
-		super.tick(jsort, defs);
+		super.exitOperations(jsort);
 	}
 	
 	@Override
-	public void paintComponent(Graphics g, Defines defs, Color c) {
-		super.paintComponent(g, defs, c);
-		slider.paintComponent(g, defs);
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		slider.paintComponent(g);
 		g.setColor(Color.lightGray);
-		g.drawString("example algorithm: bubbleSort", 20+defs.defaultSliderWidth+50, 70);
+		g.drawString("example algorithm: bubbleSort", 20+Defines.defaultSliderWidth+50, 70);
 	}
 
 	public int getI() {

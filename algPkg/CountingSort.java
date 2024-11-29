@@ -4,18 +4,19 @@ import mainPkg.Defines;
 import mainPkg.JSort;
 
 public class CountingSort extends Sort{
-	public CountingSort(int elementNum, Defines defs) {
-		super(elementNum, defs);
+	public CountingSort(int elementNum) {
+		super(elementNum);
 	}
 
 	@Override
-	public void tick(JSort jsort, Defines defs) {
+	public void tick(JSort jsort) {
 		int[] output = new int[this.size+1];
+
+
+		this.startingOperations(jsort);
+		
 		int max = getMax();
 		int[] count = new int[max+1];
-
-		defs.sortingFPS = (100/defs.divisor)*100;
-		defs.FPS = defs.sortingFPS;
 		
 		for (int i = 0; i < this.size; i++) {
 			count[array[i]]++;
@@ -39,7 +40,7 @@ public class CountingSort extends Sort{
 
 			if (this.sortingUtils(jsort, i)) return;
 		}
-		
-		super.tick(jsort, defs);
+
+		super.exitOperations(jsort);
 	}
 }

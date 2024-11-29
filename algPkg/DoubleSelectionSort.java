@@ -5,15 +5,14 @@ import mainPkg.JSort;
 
 public class DoubleSelectionSort extends Sort{
 
-	public DoubleSelectionSort(int elementNum, Defines defs) {
-		super(elementNum, defs);
+	public DoubleSelectionSort(int elementNum) {
+		super(elementNum);
 	}
 	
-	public void tick(JSort jsort, Defines defs) {
+	public void tick(JSort jsort) {
 		int minIdx = 0, maxIdx = 0, max;
-		
-		defs.sortingFPS = (100/defs.divisor)*100;
-		defs.FPS = defs.sortingFPS;
+
+		this.startingOperations(jsort);
 		
 		for (int i = 0, ii = this.size-1; i < ii; i++, ii--) {
 			minIdx = i; maxIdx = i; max = array[i];
@@ -36,8 +35,8 @@ public class DoubleSelectionSort extends Sort{
 			else
 				this.swap(ii, maxIdx);
 		}
-		
-		super.tick(jsort, defs);
+
+		super.exitOperations(jsort);
 	}
 	
 }

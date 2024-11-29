@@ -5,17 +5,16 @@ import mainPkg.JSort;
 
 public class CocktailShakerSort extends Sort{
 
-	public CocktailShakerSort(int elementNum, Defines defs) {
-		super(elementNum, defs);
+	public CocktailShakerSort(int elementNum) {
+		super(elementNum);
 	}
 	
 	@Override
-	public void tick(JSort jsort, Defines defs) {
+	public void tick(JSort jsort) {
 		boolean swapped = true;
 		int start = 0, end = this.size-1;
-		
-		defs.sortingFPS = (100/defs.divisor)*100;
-		defs.FPS = defs.sortingFPS;
+
+		this.startingOperations(jsort);
 		
 		while (swapped) {
 			swapped = false;
@@ -46,8 +45,8 @@ public class CocktailShakerSort extends Sort{
 			
 			start += 1;
 		}
-		
-		super.tick(jsort, defs);
+
+		super.exitOperations(jsort);
 	}
 
 }

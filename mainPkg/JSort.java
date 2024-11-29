@@ -1,6 +1,7 @@
 package mainPkg;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -9,27 +10,16 @@ import java.awt.Point;
 import java.awt.Toolkit;
 
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
-import algPkg.BubbleSort;
-import algPkg.CocktailShakerSort;
-import algPkg.CountingSort;
-import algPkg.DoubleSelectionSort;
-import algPkg.InsertionSort;
-import algPkg.OddEvenSort;
-import algPkg.OptimizedBubbleSort;
-import algPkg.RadixSort;
-import algPkg.SelectionSort;
-import algPkg.Settings;
-import algPkg.ShellSort;
-import algPkg.Sort;
+import algPkg.*;
+
 import menuPkg.Menu;
 import utilsPkg.Button;
 import utilsPkg.KeyHandler;
 import utilsPkg.MouseHandler;
 
+
 public class JSort extends JPanel implements Runnable{
-	private Defines defs;
 	private MouseHandler mh;
 	private Menu menu;
 	private Sort sort;
@@ -43,20 +33,18 @@ public class JSort extends JPanel implements Runnable{
 	double remainingTime;
 
     public JSort() {
-    	defs = new Defines();
     	mh = new MouseHandler();
-    	menu = new Menu(defs);
-    	sort = new Sort(defs.width/10, defs);
+    	menu = new Menu();
     	kh = new KeyHandler();
     	mouse = new Point(0, 0);
      	
-    	this.setFont( new Font("serif", Font.BOLD, defs.fontSize));
+    	this.setFont( new Font("serif", Font.BOLD, Defines.fontSize));
     	
     	thread = new Thread(this);
     	
     	this.setDoubleBuffered(true);
-		this.setPreferredSize(new Dimension(defs.width, defs.height));
-		this.setSize(new Dimension(defs.width, defs.height));
+		this.setPreferredSize(new Dimension(Defines.width, Defines.height));
+		this.setSize(new Dimension(Defines.width, Defines.height));
 		this.addMouseListener(mh);
 		this.addKeyListener(kh);
 		this.setFocusable(true);
@@ -70,7 +58,7 @@ public class JSort extends JPanel implements Runnable{
     }
     
     public long getNewTimeAndSleep() {
-    	drawInterval = 1000000000/defs.FPS; //recalculate drawInterval in case the fps changes
+    	drawInterval = 1000000000/Defines.FPS; //recalculate drawInterval in case the fps changes
 		
     	try {
 			remainingTime = nextDrawTime - System.nanoTime();
@@ -90,7 +78,7 @@ public class JSort extends JPanel implements Runnable{
     
     @Override
     public void run() {
-    	drawInterval = 1000000000/defs.FPS;
+    	drawInterval = 1000000000/Defines.FPS;
     	nextDrawTime = System.nanoTime() + drawInterval;
     	remainingTime = 0;
     	
@@ -119,80 +107,54 @@ public class JSort extends JPanel implements Runnable{
     	}
     	
     	if (menu.getChoice() == 0) {
-    		if (defs.FPS != 60)
-    			defs.FPS = 60;
+    		if (Defines.FPS != Defines.menuFPS)
+    			Defines.FPS = Defines.menuFPS;
     		
-    		menu.tick(mh.clicked, mouse, defs);
+    		menu.tick(mh.clicked, mouse);
     	}else {
     		menu.buttons.choice = 0;
     		for (Button b : menu.buttons.btns)
     			b.active = false;
     		
-    		switch (menu.getChoice()) {
-    			case 1:
-    				sort = new SelectionSort(defs.width/this.defs.divisor, defs);
-    			break;
-    			case 2:
-    				sort = new BubbleSort(defs.width/this.defs.divisor, defs);
-    			break;
-    			case 3:
-    				sort = new InsertionSort(defs.width/this.defs.divisor, defs);
-    			break;
-    			case 4:
-    				sort = new CocktailShakerSort(defs.width/this.defs.divisor, defs);
-    			break;
-    			case 5:
-    				sort = new OddEvenSort(defs.width/this.defs.divisor, defs);
-    			break;
-    			case 6:
-    				sort = new ShellSort(defs.width/this.defs.divisor, defs);
-    			break;
-    			case 7:
-    				sort = new RadixSort(defs.width/this.defs.divisor, defs);
-    			break;
-    			case 8:
-    				sort = new CountingSort(defs.width/this.defs.divisor, defs);
-    			break;
-    			case 9:
-    				sort = new DoubleSelectionSort(defs.width/this.defs.divisor, defs);
-    			break;
-    			case 10:
-    				sort = new OptimizedBubbleSort(defs.width/this.defs.divisor, defs);
-    			break;
-    			case 11:
-    				sort = new Settings(defs.width, defs);
-    			break;
-    			case 12:
-    				System.exit(0);
-    			break;
-    		}
+    		Sort[] array = {
+    				new SelectionSort(Defines.width/Defines.divisor),
+    				new BubbleSort(Defines.width/Defines.divisor),
+    				new InsertionSort(Defines.width/Defines.divisor),
+    				new CocktailShakerSort(Defines.width/Defines.divisor),
+    				new OddEvenSort(Defines.width/Defines.divisor),
+    				new ShellSort(Defines.width/Defines.divisor),
+    				new RadixSort(Defines.width/Defines.divisor),
+    				new CountingSort(Defines.width/Defines.divisor),
+    				new DoubleSelectionSort(Defines.width/Defines.divisor),
+    				new OptimizedBubbleSort(Defines.width/Defines.divisor),
+    				new QuickSort(Defines.width/Defines.divisor),
+    				new MergeSort(Defines.width/Defines.divisor),
+    				new Settings(Defines.width)
+    		};
     		
-    		if (menu.getChoice() != defs.buttons)
-    			sort.tick(this, defs);
+    		if (menu.getChoice() < Defines.buttons) {
+    			sort = array[menu.getChoice()-1];
+    			array = null;
+    			sort.tick(this);
+    		}else {
+    			System.exit(0);
+    		}
         }
     }
     
     @Override
     public void paintComponent(Graphics g) {
     	g.setColor(Color.black);
-    	g.fillRect(0, 0, defs.width, defs.height); //clear background
+    	g.fillRect(0, 0, Defines.width, Defines.height); //clear background
     	
     	
-    	if (menu.getChoice() != defs.buttons) {
+    	if (menu.getChoice() != Defines.buttons) {
 	    	if (menu.getChoice() == 0)
 	    		menu.paintComponent(g);
-	    	else
-	    		sort.paintComponent(g, defs, defs.rosePurple);
+	    	else if (sort != null)
+	    		sort.paintComponent(g);
     	}
     }
-	
-	public Defines getDefs() {
-		return defs;
-	}
-
-	public void setDefs(Defines defs) {
-		this.defs = defs;
-	}
 
 	public MouseHandler getMh() {
 		return mh;

@@ -9,14 +9,14 @@ public class Menu {
 	public Buttons buttons;
 	private int choice;
 	
-	public Menu() { choice = 0; }
-	public Menu(Defines defs) {
-		buttons = new Buttons(defs);
+	
+	public Menu() {
+		buttons = new Buttons();
 		choice = 0;
 	}
 	
-	public void tick(boolean clicked, Point mousePos, Defines defs) {
-		buttons.tick(clicked, mousePos, defs);
+	public void tick(boolean clicked, Point mousePos) {
+		buttons.tick(clicked, mousePos);
 		
 		this.choice = buttons.choice;
 	}

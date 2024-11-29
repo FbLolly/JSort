@@ -4,11 +4,11 @@ import mainPkg.Defines;
 import mainPkg.JSort;
 
 public class RadixSort extends Sort{
-	public RadixSort(int elementNum, Defines defs) {
-		super(elementNum, defs);
+	public RadixSort(int elementNum) {
+		super(elementNum);
 	}
 	
-	protected void countingSort(JSort jsort, Defines defs, int exp) {
+	protected void countingSort(JSort jsort, int exp) {
 		int[] output = new int[this.size];
 		int[] count = new int[10]; //already initialized to 0 (thanks java)
 		
@@ -39,16 +39,14 @@ public class RadixSort extends Sort{
 	}
 	
 	@Override
-	public void tick(JSort jsort, Defines defs) {
+	public void tick(JSort jsort) {
+		this.startingOperations(jsort);
+		
 		int max = this.getMax();
-
-		defs.sortingFPS = (100/defs.divisor)*100;
-		defs.FPS = defs.sortingFPS;
 		
 		for (int exp = 1; max / exp > 0; exp *= 10) {
-			this.countingSort(jsort, defs, exp);
+			this.countingSort(jsort, exp);
 		}
-		
-		super.tick(jsort, defs);
+		super.exitOperations(jsort);
 	}
 }

@@ -11,27 +11,27 @@ public class Buttons {
 	public Button[] btns;
 	public int choice;
 	
-	public Buttons(Defines defs) {
-		btns = new Button[defs.buttons];
+	public Buttons () {
+		btns = new Button[Defines.buttons];
 		choice = 0;
 		
-		int tempx = defs.width/4-defs.buttonWidth/2, tempy = defs.buttonHeight*2;
+		int tempx = Defines.width/4-Defines.buttonWidth/2, tempy = Defines.buttonHeight*2;
 		
-		for (int i = 0; i < defs.buttons; i++) {
-			btns[i] = new Button(tempx, tempy, defs.buttonWidth, defs.buttonHeight, defs.rosePurple, Color.white, defs.btns[i]);
+		for (int i = 0; i < Defines.buttons; i++) {
+			btns[i] = new Button(tempx, tempy, Defines.buttonWidth, Defines.buttonHeight, Defines.rosePurple, Color.white, Defines.btns[i]);
 		
-			tempy += defs.buttonHeight*2;
+			tempy += Defines.buttonHeight*2;
 			
-			if (tempy > defs.buttonHeight*16) {
-				tempy = defs.buttonHeight*2;
-				tempx += defs.width/4;
+			if (tempy > Defines.buttonHeight*18) {
+				tempy = Defines.buttonHeight*2;
+				tempx += Defines.width/4;
 			}
 		}
 	}
 	
-	public void tick(boolean clicked, Point mousePos, Defines defs) {
-		for (int i = 0; i < defs.buttons; i++) {
-			btns[i].tick(clicked, mousePos, defs);
+	public void tick(boolean clicked, Point mousePos) {
+		for (int i = 0; i < Defines.buttons; i++) {
+			btns[i].tick(clicked, mousePos);
 			
 			if (btns[i].active)
 				choice = i+1;

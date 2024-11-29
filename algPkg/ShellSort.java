@@ -4,16 +4,15 @@ import mainPkg.Defines;
 import mainPkg.JSort;
 
 public class ShellSort extends Sort{
-	public ShellSort(int elementNum, Defines defs) {
-		super(elementNum, defs);
+	public ShellSort(int elementNum) {
+		super(elementNum);
 	}
 	
 	@Override
-	public void tick(JSort jsort, Defines defs) {
+	public void tick(JSort jsort) {
 		int temp, ii;
 
-		defs.sortingFPS = (100/defs.divisor)*100;
-		defs.FPS = defs.sortingFPS;
+		this.startingOperations(jsort);
 		
 		for (int gap = this.size/2; gap > 0; gap /= 2) {
 			for (int i = gap; i < this.size; i++) {
@@ -29,6 +28,6 @@ public class ShellSort extends Sort{
 			}
 		}
 		
-		super.tick(jsort, defs);
+		super.exitOperations(jsort);
 	}
 }

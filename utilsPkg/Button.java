@@ -47,19 +47,19 @@ public class Button {
 		
 	}
 	
-	public void tick(boolean mouseClicked, Point mousePos, Defines defs) {
+	public void tick(boolean mouseClicked, Point mousePos) {
 		if ( mousePos.x < this.x+this.width &&
 				mousePos.x > this.x &&
 				mousePos.y < this.y+this.height &&
 				mousePos.y > this.y) { //simple implementation of "checkCollisionPointRect()" in raylib
 			
 			if (this.gw < this.width) {
-				this.gx -= defs.buttonAnimationSpeed*2;
-				this.gw += defs.buttonAnimationSpeed*4;
+				this.gx -= Defines.buttonAnimationSpeed*2;
+				this.gw += Defines.buttonAnimationSpeed*4;
 			}
 			if (this.gh < this.height) {
-				this.gy -= defs.buttonAnimationSpeed;
-				this.gh += defs.buttonAnimationSpeed*2;
+				this.gy -= Defines.buttonAnimationSpeed;
+				this.gh += Defines.buttonAnimationSpeed*2;
 			}
 			
 			if (mouseClicked) {
@@ -67,12 +67,12 @@ public class Button {
 			}
 		}else {
 			if (this.gw > 0) {
-				this.gx += defs.buttonAnimationSpeed*2;
-				this.gw -= defs.buttonAnimationSpeed*4;
+				this.gx += Defines.buttonAnimationSpeed*2;
+				this.gw -= Defines.buttonAnimationSpeed*4;
 			}
 			if (this.gh > 0) {
-				this.gy += defs.buttonAnimationSpeed;
-				this.gh -= defs.buttonAnimationSpeed*2;
+				this.gy += Defines.buttonAnimationSpeed;
+				this.gh -= Defines.buttonAnimationSpeed*2;
 			}
 		}
 	}

@@ -4,16 +4,15 @@ import mainPkg.Defines;
 import mainPkg.JSort;
 
 public class OddEvenSort extends Sort {
-	public OddEvenSort(int elementNum, Defines defs) {
-		super(elementNum, defs);
+	public OddEvenSort(int elementNum) {
+		super(elementNum);
 	}
 	
 	@Override
-	public void tick(JSort jsort, Defines defs) {
+	public void tick(JSort jsort) {
 		boolean sorted = false;
 
-		defs.sortingFPS = (100/defs.divisor)*100;
-		defs.FPS = defs.sortingFPS;
+		this.startingOperations(jsort);
 		
 		while (!sorted) {
 			sorted = true;
@@ -36,7 +35,7 @@ public class OddEvenSort extends Sort {
 				if (this.sortingUtils(jsort, i)) return;
 			}
 		}
-		
-		super.tick(jsort, defs);
+
+		super.exitOperations(jsort);
 	}
 }

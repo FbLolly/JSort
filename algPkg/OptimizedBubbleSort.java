@@ -5,16 +5,15 @@ import mainPkg.JSort;
 
 public class OptimizedBubbleSort extends Sort{
 
-	public OptimizedBubbleSort(int elementNum, Defines defs) {
-		super(elementNum, defs);
+	public OptimizedBubbleSort(int elementNum) {
+		super(elementNum);
 	}
 	
-	public void tick(JSort jsort, Defines defs) {
+	public void tick(JSort jsort) {
 		boolean sorted = false;
 		int max = this.size-1;
-		
-		defs.sortingFPS = (100/defs.divisor)*100;
-		defs.FPS = defs.sortingFPS;
+
+		this.startingOperations(jsort);
 		
 		while (!sorted) {
 			sorted = true;
@@ -32,8 +31,8 @@ public class OptimizedBubbleSort extends Sort{
 				}
 			}
 		}
-		
-		super.tick(jsort, defs);
+
+		super.exitOperations(jsort);
 	}
 
 }

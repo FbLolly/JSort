@@ -4,17 +4,16 @@ import mainPkg.Defines;
 import mainPkg.JSort;
 
 public class SelectionSort extends Sort{
-	public SelectionSort(int elementNum, Defines defs) {
-		super(elementNum, defs);
+	public SelectionSort(int elementNum) {
+		super(elementNum);
 	}
 	
 	
 	@Override
-	public void tick(JSort jsort, Defines defs) {
+	public void tick(JSort jsort) {
 		int minIdx = 0;
 
-		defs.sortingFPS = (100/defs.divisor)*100;
-		defs.FPS = defs.sortingFPS;
+		this.startingOperations(jsort);
 		
 		for (int i = 0; i < this.size-1; i++) {
 			minIdx = i;
@@ -29,7 +28,6 @@ public class SelectionSort extends Sort{
 			
 			this.swap(minIdx, i);
 		}
-		
-		super.tick(jsort, defs);
+		super.exitOperations(jsort);
 	}
 }

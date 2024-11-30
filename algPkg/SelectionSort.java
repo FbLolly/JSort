@@ -1,6 +1,5 @@
 package algPkg;
 
-import mainPkg.Defines;
 import mainPkg.JSort;
 
 public class SelectionSort extends Sort{

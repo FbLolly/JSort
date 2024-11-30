@@ -1,6 +1,4 @@
 package algPkg;
-
-import mainPkg.Defines;
 import mainPkg.JSort;
 
 public class BubbleSort extends Sort{

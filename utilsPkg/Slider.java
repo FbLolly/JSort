@@ -1,13 +1,13 @@
 package utilsPkg;
 
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.Point;
 
 import algPkg.Settings;
 import algPkg.Sort;
 import mainPkg.Defines;
-import mainPkg.JSort;
 
 public class Slider{
 	private int x, y, width, height;

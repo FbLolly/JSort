@@ -1,9 +1,8 @@
 package menuPkg;
 
 import java.awt.Graphics;
-import java.awt.Point;
 
-import mainPkg.Defines;
+import java.awt.Point;
 
 public class Menu {
 	public Buttons buttons;

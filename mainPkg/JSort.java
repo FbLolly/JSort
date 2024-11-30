@@ -46,7 +46,6 @@ public class JSort extends JPanel implements Runnable{
 		this.setPreferredSize(new Dimension(Defines.width, Defines.height));
 		this.setSize(new Dimension(Defines.width, Defines.height));
 		this.addMouseListener(mh);
-		this.addKeyListener(kh);
 		this.setFocusable(true);
 		this.setVisible(true);
 		this.startApp();
@@ -101,6 +100,8 @@ public class JSort extends JPanel implements Runnable{
     }
     
     public void update() {
+    	kh.handleKeys(this);
+    	
     	try {
     		mouse = getMousePoint(MouseInfo.getPointerInfo().getLocation());
     	}catch (Exception e) {
@@ -136,6 +137,7 @@ public class JSort extends JPanel implements Runnable{
     			sort = array[menu.getChoice()-1];
     			array = null;
     			sort.tick(this);
+    			kh.pressedEscape = false;
     		}else {
     			System.exit(0);
     		}

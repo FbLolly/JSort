@@ -3,7 +3,10 @@ package mainPkg;
 import java.awt.Color;
 import java.awt.Toolkit;
 
+import javax.swing.JComponent;
+
 public class Defines {
+	public static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
 	public static int FPS = 60;
 	public static int sortingFPS = 0;
 	public static int menuFPS = 60;

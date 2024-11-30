@@ -69,7 +69,7 @@ public abstract class Sort {
 	}
 	
 	protected boolean sortingUtils(JSort jsort, int special) {
-		if (jsort.kh.pressedEscapeOrEnter) {
+		if (jsort.kh.pressedEscape) {
 			jsort.getMenu().setChoice(0);
 			return true;
 		}

@@ -4,6 +4,6 @@
 /**
  * 
  */
-module JSort_fr {
+module JSort {
 	requires java.desktop;
 }

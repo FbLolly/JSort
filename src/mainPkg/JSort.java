@@ -200,3 +200,4 @@ public class JSort extends JPanel implements Runnable{
 		this.mouse = mouse;
 	}
 }
+//Copyright 2024 FbLolly

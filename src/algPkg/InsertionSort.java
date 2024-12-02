@@ -33,3 +33,4 @@ public class InsertionSort extends Sort{
 		super.exitOperations(jsort);
 	}
 }
+//Copyright 2024 FbLolly

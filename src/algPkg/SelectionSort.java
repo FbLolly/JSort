@@ -30,3 +30,4 @@ public class SelectionSort extends Sort{
 		super.exitOperations(jsort);
 	}
 }
+//Copyright 2024 FbLolly

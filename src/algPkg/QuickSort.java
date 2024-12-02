@@ -46,3 +46,4 @@ public class QuickSort extends Sort{
 		this.exitOperations(jsort);
 	}
 }
+//Copyright 2024 FbLolly

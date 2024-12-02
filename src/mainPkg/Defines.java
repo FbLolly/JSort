@@ -28,3 +28,4 @@ public class Defines {
 	
 	public static Color rosePurple = new Color(186, 85, 211);
 }
+//Copyright 2024 FbLolly

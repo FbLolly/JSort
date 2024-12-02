@@ -20,3 +20,4 @@ public class Main {
 		frame.pack();
 	}
 }
+//Copyright 2024 FbLolly

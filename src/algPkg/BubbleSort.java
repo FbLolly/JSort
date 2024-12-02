@@ -23,3 +23,4 @@ public class BubbleSort extends Sort{
 		super.exitOperations(jsort);
 	}
 }
+//Copyright 2024 FbLolly

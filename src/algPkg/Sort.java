@@ -175,3 +175,4 @@ public abstract class Sort {
 		this.speedSlider = speedSlider;
 	}
 }
+//Copyright 2024 FbLolly

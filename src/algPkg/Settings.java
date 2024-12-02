@@ -86,3 +86,4 @@ public class Settings extends Sort{
 		this.ii = ii;
 	}
 }
+//Copyright 2024 FbLolly

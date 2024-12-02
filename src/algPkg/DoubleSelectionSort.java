@@ -39,3 +39,4 @@ public class DoubleSelectionSort extends Sort{
 	}
 	
 }
+//Copyright 2024 FbLolly
